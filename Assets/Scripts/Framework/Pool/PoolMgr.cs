@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 class PoolData
 {
@@ -28,14 +29,14 @@ class PoolData
         obj.transform.parent = _par.transform;
     }
 
-    public GameObject GetObj()
+    public void GetObj(UnityAction<GameObject> callback = null)
     {
-        GameObject obj = null;
-        obj = PoolList[0];
+        GameObject obj = PoolList[0];
         PoolList.RemoveAt(0);
         obj.SetActive(true);
         obj.transform.parent = null;
-        return obj;
+
+        callback?.Invoke(obj);
     }
 }
 
@@ -45,20 +46,21 @@ public class PoolMgr : SingletonBase<PoolMgr>
     private GameObject _poolNode;
 
     
-    public GameObject GetObj(string name)
+    public void GetObj(string name, UnityAction<GameObject> callback = null)
     {
-        GameObject res = null;
 
         if (_dic.ContainsKey(name) && _dic[name].PoolList.Count > 0)
         {
-            res = _dic[name].GetObj();
+            _dic[name].GetObj(callback);
         }
         else
         {
-            res = GameObject.Instantiate(Resources.Load<GameObject>(name));
-            res.name = name;
+            ResMgr.Instance.LoadAsync<GameObject>(name, (o) =>
+            {
+                o.name = name;
+                callback?.Invoke(o);
+            });
         }
-        return res;
     }
 
     public void PushObj(string name, GameObject obj)
