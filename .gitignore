@@ -1,1 +1,8 @@
-﻿/Assets/
+﻿/.idea
+/Logs
+/Library
+/obj
+/Packages
+/Temp
+/Assembly-CSharp.csproj
+/UnityFramework.sln
