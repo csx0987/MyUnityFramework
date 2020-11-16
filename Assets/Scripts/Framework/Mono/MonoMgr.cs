@@ -40,7 +40,7 @@ public class MonoMgr : SingletonBase<MonoMgr>
 
     public Coroutine StartCoroutine_Auto(IEnumerator routine)
     {
-        return controller.StartCoroutine_Auto(routine);
+        return controller.StartCoroutine(routine);
     }
 
     public void StopCoroutine(IEnumerator routine)
