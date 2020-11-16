@@ -19,12 +19,12 @@ public class InputMgr : SingletonBase<InputMgr>
     {
         if (Input.GetKeyDown(key))
         {
-            EventCenter.Instance.EventTrigger("keydown", key);
+            EventCenter.Instance.EventTrigger<KeyCode>("keydown", key);
         }
 
         if (Input.GetKeyUp(key))
         {
-            EventCenter.Instance.EventTrigger("keyup", key);
+            EventCenter.Instance.EventTrigger<KeyCode>("keyup", key);
         }
     }
     

@@ -7,16 +7,16 @@ public class Player : MonoBehaviour
 {
     private void Awake()
     {
-        EventCenter.Instance.AddEventListener("MonsterDead", LevelUp);
+        EventCenter.Instance.AddEventListener<Monster>("MonsterDead", LevelUp);
     }
 
     private void OnDestroy()
     {
-        EventCenter.Instance.RemoveEventListener("MonsterDead", LevelUp);
+        EventCenter.Instance.RemoveEventListener<Monster>("MonsterDead", LevelUp);
     }
 
-    void LevelUp(object param)
+    void LevelUp(Monster param)
     {
-        Debug.Log("Level Up" + (param as Monster).name);
+        Debug.Log("Level Up" + param.name);
     }
 }
