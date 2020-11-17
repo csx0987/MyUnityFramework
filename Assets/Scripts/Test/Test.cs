@@ -12,18 +12,14 @@ class TestTest
 
 public class Test : MonoBehaviour
 {
+    void Start()
+    {
+        UIMgr.Instance.ShowPanel<LoginPanel>("LoginPanel", E_UI_Layer.Bot);
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            PoolMgr.Instance.GetObj("Test/Cube");
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            PoolMgr.Instance.GetObj("Test/Sphere");
-        }
+        
     }
 }
